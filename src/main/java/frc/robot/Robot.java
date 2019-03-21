@@ -7,13 +7,13 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
 public class Robot extends TimedRobot {
-
+  Gamepad gamepad = new Gamepad(0);
 
   @Override
   public void robotInit() {
@@ -22,14 +22,31 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-	public void teleopInit() {
-		DriveTrain.setAllTurnOrientation(0, false); // sets them back to calibrated zero position
-	}
- 
+  public void teleopInit() {
+    DriveTrain.setAllTurnOrientation(0, false); // sets them back to calibrated zero position
+  }
+
+  /**
+   * This function is called periodically during operator control.
+   */
+  @Override
+  public void teleopPeriodic() {
+    if (gamepad.getButtonStateStart()) {
+      RobotGyro.reset();
+      DriveTrain.resetTurnEncoders(); // sets encoders based on absolute encoder positions
+      DriveTrain.setAllTurnOrientation(0);
+    }
+
+    double driveYAxisAmount = gamepad.getLeftY();
+    double driveStrafeAxisAmount = -gamepad.getLeftX();
+    double driveRotAxisAmount = gamepad.getRightX();
+
+    DriveTrain.fieldCentricDrive(driveYAxisAmount, driveStrafeAxisAmount, driveRotAxisAmount);
+  }
+
   @Override
   public void robotPeriodic() {
   }
-
 
   @Override
   public void autonomousInit() {
@@ -42,13 +59,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
 
-  }
-
-  /**
-   * This function is called periodically during operator control.
-   */
-  @Override
-  public void teleopPeriodic() {
   }
 
   /**
