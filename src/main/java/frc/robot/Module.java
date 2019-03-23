@@ -31,7 +31,7 @@ public class Module {
 
 		mModuleID = moduleID;
 		driveMotor = new WPI_TalonSRX(driveTalonID);
-
+		driveMotor.configFactoryDefault(10);
 		driveMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
 		DRIVE_P = dP;
 		DRIVE_I = dI;
@@ -52,6 +52,7 @@ public class Module {
 		driveMotor.setSensorPhase(true);
 
 		turnMotor = new WPI_TalonSRX(turnTalonID);
+		turnMotor.configFactoryDefault(10);
 		mTurnZeroPos = tZeroPos;
 
 		turnMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
