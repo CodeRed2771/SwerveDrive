@@ -17,12 +17,11 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class Gamepad extends Joystick {
   // Gamepad axis ports
-  private static final int AXIS_LEFT_X = 1;
-  private static final int AXIS_LEFT_Y = 2;
-  private static final int AXIS_SHOULDER = 3;
+  private static final int AXIS_LEFT_X = 0;
+  private static final int AXIS_LEFT_Y = 1;
+  private static final int AXIS_SHOULDER = 2;
   private static final int AXIS_RIGHT_X = 4;
   private static final int AXIS_RIGHT_Y = 5;
-  private static final int AXIS_DPAD = 6;
 
   // Gamepad buttons
   private static final int BUTTON_A = 2;
@@ -107,7 +106,7 @@ public class Gamepad extends Joystick {
    * Checks whether Button Start is being pressed and returns true if it is.
    */
   public boolean getButtonStateStart() {
-    return getRawButton(BUTTON_START);
+    return getRawButton(8);
   }
 
   /**
@@ -138,27 +137,7 @@ public class Gamepad extends Joystick {
     return new JoystickButton(this, BUTTON_Y);
   }
 
-  /**
-   * Return the DPad axis positions.
-   */
-  public double getDPadX() {
-    return getRawAxis(AXIS_DPAD);
-  }
-
-  /**
-   * DPad Left and Right only
-   * WPILIB cannot access the vertical axis of the Logitech Game Controller Dpad
-   */
-
-  public boolean getDPadLeft() {
-    double x = getDPadX();
-    return (x < -0.5);
-  }
-
-  public boolean getDPadRight() {
-    double x = getDPadX();
-    return (x > 0.5);
-  }
+  
 
   /**
    * Gets the state of the Start button

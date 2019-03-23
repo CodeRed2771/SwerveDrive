@@ -264,12 +264,6 @@ public class DriveTrain implements PIDOutput {
 		}
 	}
 
-	private static boolean allowTurnEncoderReset = false;
-
-	public static void allowTurnEncoderReset() {
-		allowTurnEncoderReset = true;
-	}
-
 	/*
 	 * Resets the turn encoder values relative to what we've determined to be the
 	 * "zero" position. 
@@ -287,7 +281,7 @@ public class DriveTrain implements PIDOutput {
 			moduleB.setTurnPower(0);
 			moduleD.setTurnPower(0);
 
-			Timer.delay(1);
+			Timer.delay(.1);
 
 			// first find the current absolute position of the turn encoders
 			modAOff = DriveTrain.moduleA.getTurnAbsolutePosition();

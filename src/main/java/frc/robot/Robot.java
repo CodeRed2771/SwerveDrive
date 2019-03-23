@@ -7,10 +7,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends TimedRobot {
   Gamepad gamepad = new Gamepad(0);
@@ -32,12 +29,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if (gamepad.getButtonStateStart()) {
+      System.out.println("Start pressed - reset");
       RobotGyro.reset();
       DriveTrain.resetTurnEncoders(); // sets encoders based on absolute encoder positions
       DriveTrain.setAllTurnOrientation(0);
     }
 
-    double driveYAxisAmount = gamepad.getLeftY();
+    double driveYAxisAmount = -gamepad.getLeftY();
     double driveStrafeAxisAmount = -gamepad.getLeftX();
     double driveRotAxisAmount = gamepad.getRightX();
 
@@ -50,7 +48,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-
   }
 
   /**
@@ -58,7 +55,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-
   }
 
   /**

@@ -114,7 +114,7 @@ public class Module {
 	 * @return turn encoder absolute position
 	 */
 	public double getTurnAbsolutePosition() {
-		return (turnMotor.getSensorCollection().getPulseWidthPosition() & 0xFFF) / 4095d;
+		return (turnMotor.getSensorCollection().getPulseWidthPosition() & 0xFFF) / 4096d;
 	}
 
 	public double getTurnRelativePosition() {
@@ -122,7 +122,7 @@ public class Module {
 		// relative to the calibrated zero position.
 		// uses encoder ticks to figure out where we are
 
-		double currentPos = (getTurnEncoderValue() % 4096d) / 4096d;
+		double currentPos =  getTurnAbsolutePosition(); // (getTurnEncoderValue() & 0xFFF) / 4096d;
 		if (currentPos < 0) {
 			currentPos = 1 + currentPos;
 		}
